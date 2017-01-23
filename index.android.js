@@ -21,7 +21,7 @@ export default class SoFRN extends Component {
           {I18n.t('greeting')}
         </Text>
         <Text style={styles.instructions}>
-          {I18n.locale}
+          {I18n.locale} + yes!
         </Text>
         <Text style={styles.instructions}>
           Double tap R on your keyboard to reload,{'\n'}
