@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+'use strict';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -11,16 +11,17 @@ import {
   Text,
   View
 } from 'react-native';
+import I18n from './i18n/string';
 
 export default class SoFRN extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!!
+          {I18n.t('greeting')}
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.android.js
+          {I18n.locale}
         </Text>
         <Text style={styles.instructions}>
           Double tap R on your keyboard to reload,{'\n'}
