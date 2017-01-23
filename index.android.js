@@ -11,7 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
-import I18n from './i18n/string';
+import I18n from './js/i18n/string';
 
 export default class SoFRN extends Component {
   render() {
