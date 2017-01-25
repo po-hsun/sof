@@ -8,10 +8,10 @@ I18n.fallbacks = true;
 
 I18n.translations = {
   en: {
-    greeting: 'Hi!'
+    greeting: 'Hi!!'
   },
   zh: {
-    greeting: '你好!'
+    greeting: '你好!!'
   }
 };
 

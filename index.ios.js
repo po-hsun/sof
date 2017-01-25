@@ -19,7 +19,7 @@ export default class SoFRN extends Component {
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
-        <Text style={styles.instructions}>
+        <Text style={styles.instructions} backgroundColor="rgba(0, 0, 0, 0.2)">
           To get started, edit index.ios.js
         </Text>
         <Text style={styles.instructions}>
