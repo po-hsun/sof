@@ -38,5 +38,7 @@ export default function navigationState( state : State = initialState, action : 
             if ( state.index === 0 || state.routes.length === 1 )
                 return state;
             return NavigationStateUtils.pop( state );
+        default:
+          return state;
     }
 }

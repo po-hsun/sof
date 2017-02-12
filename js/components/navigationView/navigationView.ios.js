@@ -8,8 +8,7 @@ import Tab from '../tabView/tabView.ios.js'
 export default class Navigation extends Component {
 
     state = {
-        number: 0,
-        selectedTabIndex: 0
+        number: 0
     };
 
     renderContent( name : string ) {
@@ -35,19 +34,19 @@ export default class Navigation extends Component {
         );
         return (
             <TabBarIOS unselectedTintColor="rgb(135,135,135)" tintColor="rgb(73,174,255)" unselectedItemTintColor="rgb(135,135,135)" barTintColor="rgba(250,250,250,0.9)">
-                <Tab title={'Feed'} icon={require('../../components/tabView/img/icFeed.png')} selected={this.state.selectedTabIndex === 0} onPress={( ) => {
+                <Tab title={'Feed'} icon={require('../../components/tabView/img/icFeed.png')} selected={this.props.index === 0} onPress={( ) => {
                     this.props.changeTab( 0 )
                 }}>{content}</Tab>
-                <Tab title={'Curriculum'} icon={require('../../components/tabView/img/icFeed.png')} selected={this.state.selectedTabIndex === 1} onPress={( ) => {
+                <Tab title={'Curriculum'} icon={require('../../components/tabView/img/icFeed.png')} selected={this.props.index === 1} onPress={( ) => {
                     this.props.changeTab( 1 )
                 }}>{content}</Tab>
-                <Tab title={'Activity'} icon={require( '../../components/tabView/img/icActivity.png' )} selected={this.state.selectedTabIndex === 2} onPress={( ) => {
+                <Tab title={'Activity'} icon={require( '../../components/tabView/img/icActivity.png' )} selected={this.props.index === 2} onPress={( ) => {
                     this.props.changeTab( 2 )
                 }}>{content}</Tab>
-                <Tab title={'Heat Map'} icon={require( '../../components/tabView/img/icHeatmap.png' )} selected={this.state.selectedTabIndex === 3} onPress={( ) => {
+                <Tab title={'Heat Map'} icon={require( '../../components/tabView/img/icHeatmap.png' )} selected={this.props.index === 3} onPress={( ) => {
                     this.props.changeTab( 3 )
                 }}>{content}</Tab>
-                <Tab title={'Profile'} icon={require( '../../components/tabView/img/rectangle3.png' )} selected={this.state.selectedTabIndex === 4} onPress={( ) => {
+                <Tab title={'Profile'} icon={require( '../../components/tabView/img/rectangle3.png' )} selected={this.props.index === 4} onPress={( ) => {
                     this.props.changeTab( 4 )
                 }}>{content}</Tab>
             </TabBarIOS>
