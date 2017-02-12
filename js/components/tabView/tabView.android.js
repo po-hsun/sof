@@ -18,20 +18,22 @@ class Tab extends Component {
                 styles.HeighLightContainer, {
                     width: 200
                 }
-            ]} underlayColor='#f5f5f5' onPress={( ) => ToastAndroid.show( 'This is a toast with short duration', ToastAndroid.SHORT )}>
+            ]} underlayColor='#f5f5f5' onPress={this.props.onPress}>
                 <View style={[
                     styles.ItemContainer, {
                         width: 200
                     }
                 ]}>
-                    <Image width={24} height={24} source={{
-                        uri: this.props.uri
-                    }} style={styles.ItemIcon}/>
+                    <Image width={24} height={24} source={this.props.icon} style={styles.ItemIcon}/>
                     <Text style={styles.ItemName}>{this.props.name}</Text>
                 </View>
             </TouchableHighlight>
         );
     }
 }
+
+Tab.propTypes = {
+    onPress: React.PropTypes.func.isRequired
+};
 
 module.exports = Tab;

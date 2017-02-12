@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
     ItemIcon: {
         width: 24,
         height: 24,
-        marginLeft: 24
+        marginLeft: 24,
+        tintColor: 'rgb(73,174,255)'
     },
     ItemName: {
         flex: 1,

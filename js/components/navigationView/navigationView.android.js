@@ -15,8 +15,8 @@ import { connect } from 'react-redux';
 
 export default class Navigation extends Component {
 
-    constructor( props ) {
-        super( props );
+    constructor( ) {
+        super( );
         this.openDrawer = this.openDrawer.bind( this );
         this.state = {
             navigationViewWidth: 200
@@ -39,30 +39,51 @@ export default class Navigation extends Component {
                         width: this.state.navigationViewWidth
                     }
                 ]}/>
-                <Tab name='Home' uri='ic_home'/>
-                <Tab name='Manage Class' uri='ic_manageclass'/>
-                <Tab name='Students' uri='ic_classname'/>
-                <Tab name='Add New Student' uri='ic_add'/>
+                <Tab name='Feed' icon={require( '../../components/tabView/img/icFeed.png' )} onPress={( ) => {
+                    this.props.changeTab( 0 )
+                }}/>
+                <Tab name='Curriculum' icon={require( '../../components/tabView/img/icFeed.png' )} onPress={( ) => {
+                    this.props.changeTab( 1 )
+                }}/>
+                <Tab name='Activity' icon={require( '../../components/tabView/img/icActivity.png' )} onPress={( ) => {
+                    this.props.changeTab( 2 )
+                }}/>
+                <Tab name='Heat Map' icon={require( '../../components/tabView/img/icHeatmap.png' )} onPress={( ) => {
+                    this.props.changeTab( 3 )
+                }}/>
+                <Tab name='Profile' icon={require( '../../components/tabView/img/rectangle3.png' )} onPress={( ) => {
+                    this.props.changeTab( 4 )
+                }}/>
                 <View style={[
                     styles.divider, {
                         width: this.state.navigationViewWidth
                     }
                 ]}/>
-                <Tab name='Setting' uri='ic_setting'/>
-                <Tab name='Contact Support' uri='ic_contact'/>
-                <Tab name='Log Out' uri='ic_logout'/>
+                <Tab name='Setting' icon={{
+                    uri: 'ic_setting'
+                }} onPress={( ) => {}}/>
+                <Tab name='Contact Support' icon={{
+                    uri: 'ic_contact'
+                }} onPress={( ) => {}}/>
+                <Tab name='Log Out' icon={{
+                    uri: 'ic_logout'
+                }} onPress={( ) => {}}/>
             </View>
         );
         return (
             <DrawerLayoutAndroid drawerPosition={DrawerLayoutAndroid.positions.Left} drawerWidth={this.state.navigationViewWidth} renderNavigationView={( ) => navigationView} ref={( _drawer ) => this.drawer = _drawer}>
                 <View style={{
                     flex: 1,
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
                     <TouchableHighlight onPress={this.openDrawer}>
                         <View>
                             <Text>{'Open Drawer'}</Text>
-                            <Text>Home Page!!</Text>
+                            <Text style={{
+                                color: 'blue'
+                            }}>{this.state.number}</Text>
+                            <Text>{this.props.title} {this.props.index}</Text>
                         </View>
                     </TouchableHighlight>
                 </View>
