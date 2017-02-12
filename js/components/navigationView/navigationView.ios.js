@@ -35,10 +35,10 @@ export default class Navigation extends Component {
         );
         return (
             <TabBarIOS unselectedTintColor="rgb(135,135,135)" tintColor="rgb(73,174,255)" unselectedItemTintColor="rgb(135,135,135)" barTintColor="rgba(250,250,250,0.9)">
-                <Tab title={'Feed'} icon={require( '../../components/tabView/img/icFeed.png' )} selected={this.state.selectedTabIndex === 0} onPress={( ) => {
+                <Tab title={'Feed'} icon={require('../../components/tabView/img/icFeed.png')} selected={this.state.selectedTabIndex === 0} onPress={( ) => {
                     this.props.changeTab( 0 )
                 }}>{content}</Tab>
-                <Tab title={'Curriculum'} icon={require( '../../components/tabView/img/icFeed.png' )} selected={this.state.selectedTabIndex === 1} onPress={( ) => {
+                <Tab title={'Curriculum'} icon={require('../../components/tabView/img/icFeed.png')} selected={this.state.selectedTabIndex === 1} onPress={( ) => {
                     this.props.changeTab( 1 )
                 }}>{content}</Tab>
                 <Tab title={'Activity'} icon={require( '../../components/tabView/img/icActivity.png' )} selected={this.state.selectedTabIndex === 2} onPress={( ) => {
