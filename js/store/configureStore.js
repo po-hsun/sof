@@ -1,5 +1,6 @@
 //@flow
 'use strict';
 import { createStore } from 'redux';
+import tabReducer from '../reducers/tabReducer'
 
-module.exports = createStore(( ) => {});
+module.exports = createStore(tabReducer);

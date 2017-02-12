@@ -13,7 +13,7 @@ import Tab from '../tabView/tabView';
 import { styles } from './navigationViewStyle';
 import { connect } from 'react-redux';
 
-class Navigation extends Component {
+export default class Navigation extends Component {
 
     constructor( props ) {
         super( props );
@@ -74,5 +74,3 @@ class Navigation extends Component {
         this.drawer.openDrawer( );
     }
 }
-
-module.exports = connect( )( Navigation );
