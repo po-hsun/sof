@@ -4,6 +4,8 @@ import { PUSH_ROUTE, POP_ROUTE } from '../constants/constants';
 import { NavigationExperimental } from 'react-native';
 import type { NavigationRoute }
 from '../../node_modules/react-native/Libraries/NavigationExperimental/NavigationTypeDefinition';
+import type { Action }
+from '../actions/types';
 const { StateUtils: NavigationStateUtils } = NavigationExperimental;
 
 const initialState = {
@@ -15,11 +17,6 @@ const initialState = {
             title: 'Home'
         }
     ]
-};
-
-type Action = {
-    type: string,
-    route: NavigationRoute
 };
 
 type State = {
@@ -39,6 +36,6 @@ export default function navigationState( state : State = initialState, action : 
                 return state;
             return NavigationStateUtils.pop( state );
         default:
-          return state;
+            return state;
     }
 }

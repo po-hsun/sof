@@ -1,7 +1,10 @@
 //@flow
 'use strict';
-import { createStore } from 'redux';
-import rootReducer from '../reducers'
-import tabReducer from '../reducers/tabReducer'
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from '../reducers';
+import tabReducer from '../reducers/tabReducer';
+import createLogger from 'redux-logger';
 
-module.exports = createStore(tabReducer);
+const logger = createLogger( );
+
+module.exports = createStore(tabReducer, applyMiddleware( logger ));

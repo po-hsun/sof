@@ -1,18 +1,15 @@
 //@flow
 'use strict';
 import { PRESS_FEED, PRESS_HEATMAP, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_PROFILE } from '../constants/constants';
-
-type Action = {
-    type: string,
-    indexOfTabs: number
-};
+import type { Action }
+from '../actions/types';
 
 type State = {
     indexOfTabs: number,
     tabs: Object[]
 };
 
-const initailState = {
+const initialState = {
     indexOfTabs: 0,
     tabs: [
         {
@@ -29,7 +26,7 @@ const initailState = {
     ]
 };
 
-export default function tabReducer( state : State = initailState, action : Action ) : State {
+export default function tabReducer( state : State = initialState, action : Action ) : State {
     switch( action.type ) {
         case PRESS_FEED:
             {

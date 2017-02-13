@@ -10,9 +10,14 @@ function mapDispatchToProps( dispatch : Function ) {
     };
 }
 
+// function mapStateToProps( state ) {
+//     const index = state.indexOfTabs;
+//     return { index: index, title: state.tabs[index].title };
+// }
+
 function mapStateToProps( state ) {
     const index = state.indexOfTabs;
-    return { index: index, title: state.tabs[index].title }
+    return { index: index, title: state.tabs[index].title };
 }
 
 module.exports = connect( mapStateToProps, mapDispatchToProps )( Navigation );
