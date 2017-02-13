@@ -2,7 +2,7 @@
 'use strict';
 import { PUSH_ROUTE, POP_ROUTE } from '../constants/constants';
 import { NavigationExperimental } from 'react-native';
-import type { NavigationRoute }
+import type { NavigationRoute, NavigationState }
 from '../../node_modules/react-native/Libraries/NavigationExperimental/NavigationTypeDefinition';
 import type { Action }
 from '../actions/types';
@@ -10,7 +10,7 @@ const { StateUtils: NavigationStateUtils } = NavigationExperimental;
 
 const initialState = {
     index: 0,
-    key: 'root',
+    key: 'home',
     routes: [
         {
             key: 'home',
@@ -25,7 +25,7 @@ type State = {
     routes: NavigationRoute[]
 };
 
-export default function navigationState( state : State = initialState, action : Action ) : State {
+export default function navigationState( state : State = initialState, action : Action ) : NavigationState {
     switch( action.type ) {
         case PUSH_ROUTE:
             if (state.routes[state.index].key === ( action.route && action.route.key ))
