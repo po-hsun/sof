@@ -7,4 +7,4 @@ import createLogger from 'redux-logger';
 
 const logger = createLogger( );
 
-module.exports = createStore(tabReducer, applyMiddleware( logger ));
+module.exports = createStore(rootReducer, applyMiddleware( logger ));

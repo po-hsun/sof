@@ -9,32 +9,41 @@ from '../actions/types';
 const { StateUtils: NavigationStateUtils } = NavigationExperimental;
 
 const initialState = {
-    index: 0,
-    key: 'root',
-    routes: [
-        {
-            key: 'home',
-            title: 'Home'
-        }
-    ]
+    navState: {
+        index: 0,
+        key: 'root',
+        routes: [
+            {
+                key: 'home',
+                title: 'Home'
+            }
+        ]
+    }
 };
 
-type State = {
+type navState = {
     index: number,
     key: string,
     routes: NavigationRoute[]
 };
 
-export default function navigationState( state : State = initialState, action : Action ) {
+type State = {
+    navState: navState
+};
+
+export default function navigationState( state : State = initialState, action : Action ) : State {
+    var navState = {
+        ...state.navState
+    };
     switch ( action.type ) {
         case PUSH_ROUTE:
-            if (state.routes[state.index].key === ( action.route && action.route.key ))
+            if (state.navState.routes[state.navState.index].key === ( action.route && action.route.key ))
                 return state;
-            return NavigationStateUtils.push( state, action.route );
+            return NavigationStateUtils.push( navState, action.route );
         case POP_ROUTE:
-            if ( state.index === 0 || state.routes.length === 1 )
+            if ( state.navState.index === 0 || state.navState.routes.length === 1 )
                 return state;
-            return NavigationStateUtils.pop( state );
+            return NavigationStateUtils.pop( navState );
         default:
             return state;
     }

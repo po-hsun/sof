@@ -4,59 +4,73 @@ import { PRESS_FEED, PRESS_HEATMAP, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_PROF
 import type { Action }
 from '../actions/types';
 
-type State = {
+type TabState = {
     indexOfTabs: number,
     tabs: Object[]
 };
 
+type State = {
+    tabState: TabState
+};
+
 const initialState = {
-    indexOfTabs: 0,
-    tabs: [
-        {
-            title: 'Feed'
-        }, {
-            title: 'Curriculum'
-        }, {
-            title: 'Activity'
-        }, {
-            title: 'Heat Map'
-        }, {
-            title: 'Profile'
-        }
-    ]
+    tabState: {
+        indexOfTabs: 0,
+        tabs: [
+            {
+                title: 'Feed'
+            }, {
+                title: 'Curriculum'
+            }, {
+                title: 'Activity'
+            }, {
+                title: 'Heat Map'
+            }, {
+                title: 'Profile'
+            }
+        ]
+    }
 };
 
 export default function tabReducer( state : State = initialState, action : Action ) : State {
-    switch( action.type ) {
+    var tabState = {
+        ...state.tabState
+    };
+    switch ( action.type ) {
         case PRESS_FEED:
             {
-                return {
-                    ...state,
-                    indexOfTabs: action.indexOfTabs
+                tabState = {
+                    ...tabState,
+                    'indexOfTabs': 0
                 };
+                return { tabState };
             }
         case PRESS_CURRICULUM:
             {
-                return {
-                    ...state,
-                    indexOfTabs: action.indexOfTabs
+                tabState = {
+                    ...tabState,
+                    'indexOfTabs': 1
                 };
+                return { tabState };
             }
         case PRESS_ACTIVITY:
-            return {
-                ...state,
-                indexOfTabs: action.indexOfTabs
+            tabState = {
+                ...tabState,
+                'indexOfTabs': 2
             };
+            return { tabState };
         case PRESS_HEATMAP:
-            return {
-                ...state,
-                indexOfTabs: action.indexOfTabs
+            tabState = {
+                ...tabState,
+                'indexOfTabs': 3
             };
+            return { tabState };
         case PRESS_PROFILE:
-            return {
-                ...state,
-                indexOfTabs: action.indexOfTabs
+            tabState = {
+                ...tabState,
+                'indexOfTabs': 4
             };
+            return { tabState };
         default:
             return state;
     }
