@@ -25,16 +25,21 @@ type State = {
     routes: NavigationRoute[]
 };
 
-export default function navigationState( state : State = initialState, action : Action ) : NavigationState {
-    switch( action.type ) {
+export default function navigationState( state : State = initialState, action : Action ) : State {
+    var index: number,
+    routes: NavigationRoute[];
+    switch ( action.type ) {
         case PUSH_ROUTE:
             if (state.routes[state.index].key === ( action.route && action.route.key ))
                 return state;
-            return NavigationStateUtils.push( state, action.route );
+            ({ index, routes } = NavigationStateUtils.push( state, action.route ));
+            return { key: action.route.key, index: index, routes: routes };
         case POP_ROUTE:
             if ( state.index === 0 || state.routes.length === 1 )
                 return state;
-            return NavigationStateUtils.pop( state );
+
+            ({ index, routes } = NavigationStateUtils.pop( state ));
+            return { key: routes[index].key, index: index, routes: routes };
         default:
             return state;
     }

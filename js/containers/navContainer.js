@@ -1,11 +1,11 @@
 //@flow
 'use strict';
 import { connect } from 'react-redux';
-import Navigator from '../components/navigatorView';
+import Navigator from '../components/navigatorView/navigatorView';
 import { push, pop } from '../actions/navActions';
 
 function mapStateToProps( state ) {
-    return { navigationState: state.navReducer };
+    return { navState: state.navState };
 };
 
 function mapDispatchToProps( dispatch ) {
@@ -14,4 +14,4 @@ function mapDispatchToProps( dispatch ) {
         popRoute: ( ) => dispatch(pop( ))
     }
 };
-export default connect( mapStateToProps )( Navigator );
+export default connect( mapStateToProps, mapDispatchToProps )( Navigator );
