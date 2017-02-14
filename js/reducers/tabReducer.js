@@ -11,6 +11,7 @@ type State = {
 
 const initialState = {
     indexOfTabs: 0,
+    title: 'Feed',
     tabs: [
         {
             title: 'Feed'
@@ -31,27 +32,32 @@ export default function tabReducer( state : State = initialState, action : Actio
         case PRESS_FEED:
             return {
                 ...state,
-                'indexOfTabs': 0
+                'indexOfTabs': 0,
+                title: 'Feed'
             };
         case PRESS_CURRICULUM:
             return {
                 ...state,
-                'indexOfTabs': 1
+                'indexOfTabs': 1,
+                title: 'Curriculum'
             };
         case PRESS_ACTIVITY:
             return {
                 ...state,
-                'indexOfTabs': 2
+                'indexOfTabs': 2,
+                title: 'Activity'
             };
         case PRESS_HEATMAP:
             return {
                 ...state,
-                'indexOfTabs': 3
+                'indexOfTabs': 3,
+                title: 'Heat Map'
             };
         case PRESS_PROFILE:
             return {
                 ...state,
-                'indexOfTabs': 4
+                'indexOfTabs': 4,
+                title: 'Profile'
             };
         default:
             return state;
