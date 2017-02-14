@@ -117,7 +117,7 @@ export default class Navigator extends Component {
         }
     }
     render( ) {
-        return ( <NavigationCardStack direction='vertical' navigationState={this.props.navState} onNavigate={this._handleNavigate.bind( this )} renderScene={this._renderScene}/> );
+        return ( <NavigationCardStack navigationState={this.props.navState} onNavigate={this._handleNavigate.bind( this )} renderScene={this._renderScene}/> );
     }
 
 }

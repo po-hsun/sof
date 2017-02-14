@@ -12,6 +12,7 @@ import {
 import Tab from '../tabView/tabView';
 import { styles } from './navigationViewStyle';
 import { connect } from 'react-redux';
+import NavContainer from '../../containers/navContainer';
 
 export default class Navigation extends Component {
 
@@ -72,21 +73,7 @@ export default class Navigation extends Component {
         );
         return (
             <DrawerLayoutAndroid drawerPosition={DrawerLayoutAndroid.positions.Left} drawerWidth={this.state.navigationViewWidth} renderNavigationView={( ) => navigationView} ref={( _drawer ) => this.drawer = _drawer}>
-                <View style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <TouchableHighlight onPress={this.openDrawer}>
-                        <View>
-                            <Text>{'Open Drawer'}</Text>
-                            <Text style={{
-                                color: 'blue'
-                            }}>{this.state.number}</Text>
-                            <Text>{this.props.title} {this.props.index}</Text>
-                        </View>
-                    </TouchableHighlight>
-                </View>
+                <NavContainer title={this.props.title} index={this.props.index}/>
             </DrawerLayoutAndroid>
         );
     }
