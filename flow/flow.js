@@ -7,3 +7,6 @@ declare module 'react-redux' {
 declare module 'redux' {
     declare var exports : any;
 };
+declare module 'redux-logger' {
+    declare var exports : any;
+};
