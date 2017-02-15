@@ -14,7 +14,7 @@ function mapDispatchToProps( dispatch : Function ) {
 
 function mapStateToProps( state ) {
     const index = state.tabState.indexOfTabs;
-    return { index: index, title: state.tabState.title };
+    return { index: index, title: state.tabState.getCurrentTab().title };
 }
 
 module.exports = connect( mapStateToProps, mapDispatchToProps )( Navigation );

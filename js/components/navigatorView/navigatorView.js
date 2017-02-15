@@ -14,12 +14,13 @@ import { PUSH_ROUTE, POP_ROUTE, BACK_ROUTE } from '../../constants/constants';
 
 const { CardStack: NavigationCardStack, StateUtils: NavigationStateUtils, PropTypes: NavigationPropTypes } = NavigationExperimental;
 
-const Attendance = ({ _handleNavigate }) => (
+const Attendance = ({ _handleNavigate, tabTitle }) => (
     <View style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }}>
+        <Text>{tabTitle}</Text>
         <Text>Attendance</Text>
         <Button onPress={( ) => {
             const route = {
@@ -38,12 +39,13 @@ const Attendance = ({ _handleNavigate }) => (
     </View>
 );
 
-const SwitchFeed = ({ _handleNavigate }) => (
+const SwitchFeed = ({ _handleNavigate, tabTitle }) => (
     <View style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }}>
+        <Text>{tabTitle}</Text>
         <Text>SwitchFeed</Text>
         <Button onPress={( ) => {
             _handleNavigate({ type: POP_ROUTE });
@@ -93,25 +95,25 @@ export default class Navigator extends Component {
             return content;
         } else if ( key === 'attendance' ) {
             // return <SwitchFeed _goBack={this._handleBackAction.bind( this )}/>
-            return <Attendance _handleNavigate={this._handleNavigate.bind( this )}/>
+            return <Attendance _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.title}/>
         } else if ( key === 'switchFeed' )
-            return <SwitchFeed _handleNavigate={this._handleNavigate.bind( this )}/>
+            return <SwitchFeed _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.title}/>
     }
     _handleBackAction( ) {
         if ( this.props.navState.index === 0 ) {
             return false;
         }
-        this.props.popRoute( );
+        this.props.popRoute( this.props.index);
         return true;
     }
     _handleNavigate( action ) {
         switch ( action && action.type ) {
             case PUSH_ROUTE:
-                this.props.pushRoute( action.route );
+                this.props.pushRoute( action.route ,this.props.index);
                 return true;
             case BACK_ROUTE:
             case POP_ROUTE:
-                return this._handleBackAction( );
+                return this._handleBackAction(this.props.index );
             default:
                 return false;
         }

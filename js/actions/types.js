@@ -17,5 +17,6 @@ export type Action = {
     indexOfTabs: number
 } | {
     type: 'PUSH_ROUTE' | 'POP_ROUTE',
+    tabIndex: number,
     route: NavigationRoute
 };

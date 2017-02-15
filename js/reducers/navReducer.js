@@ -8,7 +8,7 @@ import type { Action }
 from '../actions/types';
 const { StateUtils: NavigationStateUtils } = NavigationExperimental;
 
-const initialState = {
+export const initialState = {
     index: 0,
     key: 'home',
     routes: [
