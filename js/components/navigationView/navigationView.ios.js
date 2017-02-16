@@ -28,24 +28,24 @@ export default class Navigation extends Component {
     };
 
     render( ) {
-      const navContainer = <NavContainer title={this.props.title} index={this.props.index}/>;
+      console.log('navView render');
         return (
             <TabBarIOS unselectedTintColor="rgb(135,135,135)" tintColor="rgb(73,174,255)" unselectedItemTintColor="rgb(135,135,135)" barTintColor="rgba(250,250,250,0.9)">
                 <Tab title={'Feed'} icon={require( '../../components/tabView/img/icFeed.png' )} selected={this.props.index === 0} onPress={( ) => {
                     this.props.changeTab( 0 )
-                }}>{navContainer}</Tab>
+                }}><NavContainer id='Feed'/></Tab>
                 <Tab title={'Curriculum'} icon={require( '../../components/tabView/img/icFeed.png' )} selected={this.props.index === 1} onPress={( ) => {
                     this.props.changeTab( 1 )
-                }}>{navContainer}</Tab>
+                }}><NavContainer id='Curriculum'/></Tab>
                 <Tab title={'Activity'} icon={require( '../../components/tabView/img/icActivity.png' )} selected={this.props.index === 2} onPress={( ) => {
                     this.props.changeTab( 2 )
-                }}>{navContainer}</Tab>
+                }}><NavContainer id='Activity'/></Tab>
                 <Tab title={'Heat Map'} icon={require( '../../components/tabView/img/icHeatmap.png' )} selected={this.props.index === 3} onPress={( ) => {
                     this.props.changeTab( 3 )
-                }}>{navContainer}</Tab>
+                }}><NavContainer id='Heat Map'/></Tab>
                 <Tab title={'Profile'} icon={require( '../../components/tabView/img/rectangle3.png' )} selected={this.props.index === 4} onPress={( ) => {
                     this.props.changeTab( 4 )
-                }}>{navContainer}</Tab>
+                }}><NavContainer id='Profile'/></Tab>
             </TabBarIOS>
         );
     }

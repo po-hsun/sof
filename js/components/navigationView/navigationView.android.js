@@ -16,8 +16,8 @@ import NavContainer from '../../containers/navContainer';
 
 export default class Navigation extends Component {
 
-    constructor( ) {
-        super( );
+    constructor(props) {
+        super(props );
         this.openDrawer = this.openDrawer.bind( this );
         this.state = {
             navigationViewWidth: 200

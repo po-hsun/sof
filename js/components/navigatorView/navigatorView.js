@@ -10,18 +10,18 @@ import {
     BackAndroid,
     Button
 } from "react-native";
-import { PUSH_ROUTE, POP_ROUTE, BACK_ROUTE } from '../../constants/constants';
+import { PUSH_ROUTE, POP_ROUTE, BACK_ROUTE, GO_HOME } from '../../constants/constants';
+import type { NavigationSceneRendererProps } from '../../../node_modules/react-native/Libraries/NavigationExperimental/NavigationTypeDefinition';
 
 const { CardStack: NavigationCardStack, StateUtils: NavigationStateUtils, PropTypes: NavigationPropTypes } = NavigationExperimental;
 
-const Attendance = ({ _handleNavigate, tabTitle }) => (
+const Attendance = ({ _handleNavigate, tabTitle, renderCount }) => (
     <View style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }}>
-        <Text>{tabTitle}</Text>
-        <Text>Attendance</Text>
+        <Text>{tabTitle} renderCount: {renderCount}</Text>
         <Button onPress={( ) => {
             const route = {
                 key: 'switchFeed',
@@ -39,26 +39,32 @@ const Attendance = ({ _handleNavigate, tabTitle }) => (
     </View>
 );
 
-const SwitchFeed = ({ _handleNavigate, tabTitle }) => (
+const SwitchFeed = ({ _handleNavigate, tabTitle, renderCount }) => (
     <View style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }}>
-        <Text>{tabTitle}</Text>
-        <Text>SwitchFeed</Text>
+        <Text>{tabTitle} renderCount: {renderCount}</Text>
         <Button onPress={( ) => {
             _handleNavigate({ type: POP_ROUTE });
         }} title="Go Back" color="#123456"/>
+        <Button onPress={()=>{_handleNavigate({type: GO_HOME})}} title='go Home' color='#234567'/>
     </View>
 );
 
 export default class Navigator extends Component {
+    _renderScene : (props:NavigationSceneRendererProps)=>?React.Element<any>;
+    _handleBackAction : Function;
+    _renderOverlay: Function;
+    renderCount: number
 
-    constructor( ) {
-        super( );
+    constructor(props) {
+        super(props);
         this._renderScene = this._renderScene.bind( this );
         this._handleBackAction = this._handleBackAction.bind( this );
+        this._renderOverlay = this._renderOverlay.bind(this);
+        this.renderCount = 0;
     }
 
     componentDidMount( ) {
@@ -68,7 +74,11 @@ export default class Navigator extends Component {
         BackAndroid.removeEventListener( 'hardwareBackPress', this._handleBackAction );
     }
 
-    _renderScene( ) {
+    _renderScene( props:NavigationSceneRendererProps ) {
+        // console.log( 'renderScene'+' tab: '+this.props.title );
+        const { route } = props.scene;
+        // console.log(JSON.stringify(props));
+        // console.log(JSON.stringify( props.scenes.slice().length ));
         var content : React.Element < any > = (
             <View style={{
                 flex: 1,
@@ -89,37 +99,43 @@ export default class Navigator extends Component {
                 }} title="Next Page" color="#841584"/>
             </View>
         );
-        const { key } = this.props.navState;
-        if ( key === 'home' ) {
-            // return <Attendance _handleNavigate={this._handleNavigate.bind( this )}/>
+        console.log( 'renderScene'+' id: '+this.props.id+' tab: '+this.props.title+' component: '+route.key+' position: '+JSON.stringify(props.position)+ ' renderCount: '+this.renderCount );
+        this.renderCount = this.renderCount + 1;
+        if ( route.key === 'home' ) {
             return content;
-        } else if ( key === 'attendance' ) {
-            // return <SwitchFeed _goBack={this._handleBackAction.bind( this )}/>
-            return <Attendance _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.title}/>
-        } else if ( key === 'switchFeed' )
-            return <SwitchFeed _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.title}/>
+        } else if ( route.key === 'attendance' ) {
+            return <Attendance _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.id} renderCount={this.renderCount}/>
+        } else if ( route.key === 'switchFeed' )
+            return <SwitchFeed _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.id} renderCount={this.renderCount}/>
     }
-    _handleBackAction( ) {
-        if ( this.props.navState.index === 0 ) {
+    _handleBackAction( ) : boolean {
+        if( this.props.navState.index === 0 ) {
             return false;
         }
-        this.props.popRoute( this.props.index);
+        this.props.popRoute( this.props.index );
         return true;
     }
-    _handleNavigate( action ) {
+    _handleNavigate( action ) : boolean {
         switch ( action && action.type ) {
             case PUSH_ROUTE:
-                this.props.pushRoute( action.route ,this.props.index);
+                this.props.pushRoute( action.route, this.props.index );
                 return true;
             case BACK_ROUTE:
             case POP_ROUTE:
-                return this._handleBackAction(this.props.index );
+                return this._handleBackAction( this.props.index );
+            case GO_HOME:
+                return this.props.goHome(this.props.index);
             default:
                 return false;
         }
     }
+
+    _renderOverlay(){
+      return <View style={{width:50,height:50,borderRadius:25,backgroundColor:'blue'}}/>
+    }
+
     render( ) {
-        return ( <NavigationCardStack navigationState={this.props.navState} onNavigate={this._handleNavigate.bind( this )} renderScene={this._renderScene}/> );
+        return ( <NavigationCardStack navigationState={this.props.navState} renderScene={this._renderScene} renderOverlay={this._renderOverlay}/> );
     }
 
 }

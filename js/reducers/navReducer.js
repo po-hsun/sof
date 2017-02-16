@@ -1,6 +1,6 @@
 //@flow
 'use strict';
-import { PUSH_ROUTE, POP_ROUTE } from '../constants/constants';
+import { PUSH_ROUTE, POP_ROUTE, GO_HOME } from '../constants/constants';
 import { NavigationExperimental } from 'react-native';
 import type { NavigationRoute, NavigationState }
 from '../../node_modules/react-native/Libraries/NavigationExperimental/NavigationTypeDefinition';
@@ -32,6 +32,7 @@ export default function navigationState( state : State = initialState, action : 
         case PUSH_ROUTE:
             if (state.routes[state.index].key === ( action.route && action.route.key ))
                 return state;
+
             ({ index, routes } = NavigationStateUtils.push( state, action.route ));
             return { key: action.route.key, index: index, routes: routes };
         case POP_ROUTE:
@@ -39,6 +40,9 @@ export default function navigationState( state : State = initialState, action : 
                 return state;
 
             ({ index, routes } = NavigationStateUtils.pop( state ));
+            return { key: routes[index].key, index: index, routes: routes };
+        case GO_HOME:
+            ({ index, routes } = NavigationStateUtils.pop(NavigationStateUtils.pop( state )));
             return { key: routes[index].key, index: index, routes: routes };
         default:
             return state;
