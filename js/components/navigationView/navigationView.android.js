@@ -73,7 +73,7 @@ export default class Navigation extends Component {
         );
         return (
             <DrawerLayoutAndroid drawerPosition={DrawerLayoutAndroid.positions.Left} drawerWidth={this.state.navigationViewWidth} renderNavigationView={( ) => navigationView} ref={( _drawer ) => this.drawer = _drawer}>
-                <NavContainer title={this.props.title} index={this.props.index}/>
+                <NavContainer id={this.props.title}/>
             </DrawerLayoutAndroid>
         );
     }

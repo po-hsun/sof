@@ -11,3 +11,5 @@
  export const POP_ROUTE = "POP_ROUTE";
  export const BACK_ROUTE = "BACK_ROUTE";
  export const GO_HOME = "GO_HOME";
+
+ export const START_CHATING = "START_CHATING";

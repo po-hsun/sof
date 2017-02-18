@@ -1,18 +1,11 @@
 //@flow
 'use strict';
 import { combineReducers } from 'redux';
-import navReducer from './navReducer';
+import rootNavReducer from './navReducer';
 import tabReducer from './tabReducer';
+import testReducer from './testReducer';
 
-var tabState = {
-  ...tabReducer,
-  navState: navReducer
-};
-
-var rootState = {
-  tabState: tabState
-};
-const rootReducer = combineReducers({tabState: tabReducer});
-// const rootReducer = combineReducers({ tabState: tabReducer, navState: navReducer });
+//const rootReducer = combineReducers({tabState: tabReducer});
+const rootReducer = combineReducers({ tabState: tabReducer, rootNavState: rootNavReducer, testState: testReducer });
 
 export default rootReducer;

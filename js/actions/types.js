@@ -20,3 +20,8 @@ export type Action = {
     tabIndex: number,
     route: NavigationRoute
 };
+
+export type RootAction = {
+    type: string,
+    isRoot: boolean
+};
