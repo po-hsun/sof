@@ -1,9 +1,9 @@
 //@flow
 'use strict';
 import { PRESS_FEED, PRESS_HEATMAP, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_PROFILE } from '../constants/constants';
-import type { Action }
+import type { Action, RootAction }
 from '../actions/types';
-import navReducer, { initialState as initialNavState } from './navReducer';
+import { navReducer, initialState as initialNavState } from './navReducer';
 
 const PRESS = [ PRESS_FEED, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_HEATMAP, PRESS_PROFILE ];
 
@@ -100,7 +100,7 @@ function tabsNavReducer( state, action ) {
 }
 
 function tabNavReducer( state : TabState, action : Action ) : TabState {
-    if( state.tabIndex !== action.tabIndex )
+    if( state.tabIndex !== action.tabIndex || action.isRoot !== undefined )
         return state;
     return {
         title: state.title,

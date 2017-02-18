@@ -9,7 +9,7 @@ import { AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-n
 import { Provider } from 'react-redux';
 import store from './js/store/configureStore';
 import I18n from './js/i18n/string';
-import Navigation from './js/containers/tabContainer';
+import RootNavigation from './js/containers/rootNavContainer';
 
 export default class SoFRN extends Component {
     constructor( props ) {
@@ -19,7 +19,7 @@ export default class SoFRN extends Component {
     render( ) {
         return (
             <Provider store={store}>
-                <Navigation/>
+                <RootNavigation/>
             </Provider>
         );
     }

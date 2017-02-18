@@ -25,7 +25,13 @@ type State = {
     routes: NavigationRoute[]
 };
 
-export default function navigationState( state : State = initialState, action : Action ) : State {
+export default function rootNavReducer( state : State = initialState, action : Action ) : State {
+    if(action.isRoot === undefined)
+      return state;
+    return navReducer( state, action );
+}
+
+export function navReducer( state : State = initialState, action : Action ) : State {
     var index: number,
     routes: NavigationRoute[];
     switch ( action.type ) {

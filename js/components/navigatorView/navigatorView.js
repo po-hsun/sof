@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { PUSH_ROUTE, POP_ROUTE, BACK_ROUTE, GO_HOME } from '../../constants/constants';
 import type { NavigationSceneRendererProps } from '../../../node_modules/react-native/Libraries/NavigationExperimental/NavigationTypeDefinition';
+import HomeView from '../homeView/home';
 
 const { CardStack: NavigationCardStack, StateUtils: NavigationStateUtils, PropTypes: NavigationPropTypes } = NavigationExperimental;
 
@@ -79,30 +80,10 @@ export default class Navigator extends Component {
         const { route } = props.scene;
         // console.log(JSON.stringify(props));
         // console.log(JSON.stringify( props.scenes.slice().length ));
-        var content : React.Element < any > = (
-            <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Text>{this.props.title} {this.props.index}</Text>
-                <Button onPress={( ) => {
-                    const route = {
-                        key: 'attendance',
-                        title: 'Attendance'
-                    };
-                    const action = {
-                        type: PUSH_ROUTE,
-                        route
-                    };
-                    this._handleNavigate( action );
-                }} title="Next Page" color="#841584"/>
-            </View>
-        );
         console.log( 'renderScene'+' id: '+this.props.id+' tab: '+this.props.title+' component: '+route.key+' position: '+JSON.stringify(props.position)+ ' renderCount: '+this.renderCount );
         this.renderCount = this.renderCount + 1;
         if ( route.key === 'home' ) {
-            return content;
+            return <HomeView _handleNavigate={this._handleNavigate.bind( this )} title={this.props.title} index={this.props.index}/>;
         } else if ( route.key === 'attendance' ) {
             return <Attendance _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.id} renderCount={this.renderCount}/>
         } else if ( route.key === 'switchFeed' )
