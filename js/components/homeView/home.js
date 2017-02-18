@@ -25,7 +25,6 @@ export default class HomeView extends Component {
     render( ) {
         return (
             <View style={{
-                marginTop: 20
             }}>
                 <Text style={{
                     alignSelf: 'center'
