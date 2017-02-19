@@ -5,7 +5,7 @@ import RootNavigator from '../components/navigatorView/rootNavigatorView';
 import { rootPush, rootPop } from '../actions/navActions';
 
 function mapStateToProps( state ) {
-    return { navState: state.rootNavState };
+    return {navState: state.get( 'rootNavState' )};
 };
 
 function mapDispatchToProps( dispatch ) {

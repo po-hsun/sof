@@ -5,7 +5,12 @@ import Navigator from '../components/navigatorView/navigatorView';
 import { push, pop, goHome } from '../actions/navActions';
 
 function mapStateToProps( state ) {
-    return { navState: state.tabState.getCurrentTab( ).navState, index: state.tabState.indexOfTabs, title: state.tabState.getCurrentTab( ).title };
+    const indexOfTabs = state.getIn([ 'tabState', 'indexOfTabs' ]);
+    return {
+        navState: state.getIn([ 'tabState', 'tabs', indexOfTabs, 'navState' ]),
+        index: indexOfTabs,
+        title: state.getIn([ 'tabState', 'tabs', indexOfTabs, 'title' ])
+    };
 };
 
 function mapDispatchToProps( dispatch ) {

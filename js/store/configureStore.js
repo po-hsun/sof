@@ -11,7 +11,6 @@ const store = function configureStore( ) {
     const store = createStore(rootReducer, applyMiddleware( logger ));
 
     if ( module.hot ) {
-        console.log( 'hot reload for replacing the rootReducer' );
         module.hot.accept(( ) => {
             const nextRootReducer = require( '../reducers' ).default;
             store.replaceReducer( nextRootReducer );

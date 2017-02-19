@@ -4,6 +4,7 @@ import { PRESS_FEED, PRESS_HEATMAP, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_PROF
 import type { Action, RootAction }
 from '../actions/types';
 import { navReducer, initialState as initialNavState } from './navReducer';
+import Immutable from 'immutable';
 
 const PRESS = [ PRESS_FEED, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_HEATMAP, PRESS_PROFILE ];
 
@@ -21,75 +22,38 @@ type State = {
     getCurrentTab: GetCurrentTab
 };
 
-const initialTabState = {
-    title: 'Feed',
-    navState: initialNavState
-};
+const InitialTabState = Immutable.Record({ title: 'Feed', tabIndex: 0, navState: initialNavState });
 
-const initialState = {
-    indexOfTabs: 0,
-    tabs: [
-        {
-            title: 'Feed',
-            tabIndex: 0,
-            navState: initialNavState
-        }, {
-            title: 'Curriculum',
-            tabIndex: 1,
-            navState: initialNavState
-        }, {
-            title: 'Activity',
-            tabIndex: 2,
-            navState: initialNavState
-        }, {
-            title: 'Heat Map',
-            tabIndex: 3,
-            navState: initialNavState
-        }, {
-            title: 'Profile',
-            tabIndex: 4,
-            navState: initialNavState
-        }
-    ],
-    getCurrentTab: function ( ) {
-        return this.tabs[this.indexOfTabs];
-    }
-};
+const initialTabState = new InitialTabState( );
+
+const initialTabsState = Immutable.List([
+    initialTabState,
+    new InitialTabState({ title: 'Curriculum', tabIndex: 1 }),
+    new InitialTabState({ title: 'Activity', tabIndex: 2 }),
+    new InitialTabState({ title: 'Heat Map', tabIndex: 3 }),
+    new InitialTabState({ title: 'Profile', tabIndex: 4 })
+]);
+
+const InitialState = Immutable.Record({ indexOfTabs: 0, tabs: initialTabsState });
+
+const initialState = new InitialState( );
 
 export default function combineReducer( state : State = initialState, action : Action ) : State {
-    return {
-        ...tabReducer( state, action ),
-        tabs: tabsNavReducer( state.tabs, action )
-    };
+    return tabReducer( state, action ).setIn(['tabs'], tabsNavReducer( state.getIn([ 'tabs' ]), action ));
 }
 
 function tabReducer( state : State, action : Action ) : State {
     switch( action.type ) {
         case PRESS_FEED:
-            return {
-                ...state,
-                'indexOfTabs': 0
-            };
+            return state.setIn( ['indexOfTabs'], 0 );
         case PRESS_CURRICULUM:
-            return {
-                ...state,
-                'indexOfTabs': 1
-            };
+            return state.setIn( ['indexOfTabs'], 1 );
         case PRESS_ACTIVITY:
-            return {
-                ...state,
-                'indexOfTabs': 2
-            };
+            return state.setIn( ['indexOfTabs'], 2 );
         case PRESS_HEATMAP:
-            return {
-                ...state,
-                'indexOfTabs': 3
-            };
+            return state.setIn( ['indexOfTabs'], 3 );
         case PRESS_PROFILE:
-            return {
-                ...state,
-                'indexOfTabs': 4
-            };
+            return state.setIn( ['indexOfTabs'], 4 );
         default:
             return state;
     }
@@ -100,11 +64,5 @@ function tabsNavReducer( state, action ) {
 }
 
 function tabNavReducer( state : TabState, action : Action ) : TabState {
-    if( state.tabIndex !== action.tabIndex || action.isRoot !== undefined )
-        return state;
-    return {
-        title: state.title,
-        tabIndex: state.tabIndex,
-        navState: navReducer( state.navState, action )
-    };
+    return state.setIn(['navState'], navReducer( state.getIn([ 'navState' ]), action ));
 }
