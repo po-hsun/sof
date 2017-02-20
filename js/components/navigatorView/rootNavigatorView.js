@@ -82,17 +82,8 @@ export default class RootNavigator extends Component {
         this._handleBackAction( );
     }
 
-    _renderOverlay( ) {
-        return <View style={{
-            width: 50,
-            height: 50,
-            borderRadius: 25,
-            backgroundColor: 'blue'
-        }}/>
-    }
-
     render( ) {
-        return ( <NavigationCardStack navigationState={this.props.navState} renderScene={this._renderScene} renderOverlay={this._renderOverlay} renderHeader={this._renderHeader.bind( this )} onNavigateBack={this._onNavigationBack.bind( this )} gestureResponseDistance={30} enableGestures={true}/> );
+        return ( <NavigationCardStack navigationState={this.props.navState} renderScene={this._renderScene} renderHeader={this._renderHeader.bind( this )} onNavigateBack={this._onNavigationBack.bind( this )} gestureResponseDistance={30} enableGestures={true}/> );
     }
 
 }
