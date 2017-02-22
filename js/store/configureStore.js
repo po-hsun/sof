@@ -4,11 +4,12 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers';
 import tabReducer from '../reducers/tabReducer';
 import createLogger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 const logger = createLogger( );
 
 const store = function configureStore( ) {
-    const store = createStore(rootReducer, applyMiddleware( logger ));
+    const store = createStore(rootReducer, applyMiddleware( thunk, logger ));
 
     if ( module.hot ) {
         module.hot.accept(( ) => {

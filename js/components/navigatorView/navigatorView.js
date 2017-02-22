@@ -83,7 +83,7 @@ export default class Navigator extends Component {
         console.log( 'renderScene'+' id: '+this.props.id+' tab: '+this.props.title+' component: '+route.key+' position: '+JSON.stringify(props.position)+ ' renderCount: '+this.renderCount );
         this.renderCount = this.renderCount + 1;
         if ( route.key === 'home' ) {
-            return <HomeView _handleNavigate={this._handleNavigate.bind( this )} title={this.props.title} index={this.props.index}/>;
+            return <HomeView _handleNavigate={this._handleNavigate.bind( this )} title={this.props.title} index={this.props.index} apiData={this.props.apiData} fetchData={this.props.fetchData}/>;
         } else if ( route.key === 'attendance' ) {
             return <Attendance _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.id} renderCount={this.renderCount}/>
         } else if ( route.key === 'switchFeed' )

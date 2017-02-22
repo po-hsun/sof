@@ -37,21 +37,6 @@ export default class HomeView extends Component {
             this._initAnimatedHandlers( );
             console.log( 'finish' );
         });
-        // Animated.stagger(3000, [
-        //     Animated.timing(this.spinValue, {
-        //         toValue: 1,
-        //         duration: 3000,
-        //         easing: Easing.linear
-        //     }),
-        //     Animated.spring(this.springValue, {
-        //         toValue: 1,
-        //         frction: 1
-        //     })
-        // ]).start(( ) => {});
-        // this.animatedHandler.start(( ) => {
-        //     this._initAnimatedHandlers( );
-        //     console.log( 'finish' );
-        // });
     }
 
     _stopAnimation( ) {
@@ -101,25 +86,30 @@ export default class HomeView extends Component {
     }
 
     componentDidMount( ) {
-        console.log( 'componentDidMount' );
+        // console.log( 'componentDidMount' );
         this._initAnimatedHandlers( );
     }
 
-    componentWillReceiveProps( ) {
-        console.log( 'componentWillReceiveProps' );
-    }
+    // componentWillReceiveProps( ) {
+    //     console.log( 'componentWillReceiveProps' );
+    // }
+    //
+    // shouldComponentUpdate( ) {
+    //     console.log( 'shouldComponentUpdate' );
+    //     return true;
+    // }
+    //
+    // componentWillUpdate( ) {
+    //     console.log( 'componentWillUpdate' );
+    // }
+    //
+    // componentDidUpdate( ) {
+    //     console.log( 'componentDidUpdate' );
+    // }
 
-    shouldComponentUpdate( ) {
-        console.log( 'shouldComponentUpdate' );
-        return true;
-    }
-
-    componentWillUpdate( ) {
-        console.log( 'componentWillUpdate' );
-    }
-
-    componentDidUpdate( ) {
-        console.log( 'componentDidUpdate' );
+    _callAPI(){
+      const fetchData = this.props.fetchData;
+      fetchData();
     }
 
     render( ) {
@@ -196,6 +186,7 @@ export default class HomeView extends Component {
                 }}>
                     <Button onPress={( ) => this._startAnimation( )} title="Start Animation" color="#841584"/>
                     <Button onPress={( ) => this._stopAnimation( )} title="Stop Animation" color="#841584"/>
+                    <Button onPress={( ) => this._callAPI( )} title="Call API" color="#841584"/>
                 </View>
                 <Animated.Image style={{
                     width: 50,
@@ -215,11 +206,15 @@ export default class HomeView extends Component {
                     opacity,
                     marginTop
                 }} source={require( './img/money.png' )}/>
+                {!this.props.apiData.isFetching && this.props.apiData.data.length === 0 && (
                 <View style={{
                     flex: 1,
                     flexWrap: 'wrap',
                     flexDirection: 'row'
-                }}>{this._renderAnimatedView( )}</View>
+                }}>{this._renderAnimatedView( )}</View>)}
+                {this.props.apiData.isFetching ? <Text>Fetching</Text> : null}
+                {this.props.apiData.data.length ? this.props.apiData.data.map((data,index)=>{return (<Text key={index}>name: {data.name} age: {data.age}</Text>)}) : null}
+                {this.props.apiData.error ? <Text>Error</Text> : null}
             </View>
         );
     }
