@@ -11,7 +11,6 @@ function mapStateToProps( state ) {
         navState: state.getIn([ 'tabState', 'tabs', indexOfTabs, 'navState' ]),
         index: indexOfTabs,
         title: state.getIn([ 'tabState', 'tabs', indexOfTabs, 'title' ]),
-        apiData: state.get( 'apiState' )
     };
 };
 
@@ -20,7 +19,6 @@ function mapDispatchToProps( dispatch ) {
         pushRoute: ( route, index ) => dispatch(push( route, index )),
         popRoute: ( index ) => dispatch(pop( index )),
         goHome: ( index ) => dispatch(goHome( index )),
-        fetchData: ( ) => dispatch(fetchData( ))
     }
 };
 export default connect( mapStateToProps, mapDispatchToProps )( Navigator );
