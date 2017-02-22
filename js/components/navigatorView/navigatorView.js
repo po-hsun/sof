@@ -58,15 +58,13 @@ const SwitchFeed = ({ _handleNavigate, tabTitle, renderCount }) => (
 export default class Navigator extends Component {
     _renderScene : (props:NavigationSceneRendererProps)=>?React.Element<any>;
     _handleBackAction : Function;
-    _renderOverlay: Function;
     renderCount: number
 
     constructor(props) {
         super(props);
         this._renderScene = this._renderScene.bind( this );
         this._handleBackAction = this._handleBackAction.bind( this );
-        this._renderOverlay = this._renderOverlay.bind(this);
-        this.renderCount = 0;
+        this.renderCount = 1;
     }
 
     componentDidMount( ) {
@@ -112,12 +110,8 @@ export default class Navigator extends Component {
         }
     }
 
-    _renderOverlay(){
-      return <View style={{width:50,height:50,borderRadius:25,backgroundColor:'blue'}}/>
-    }
-
     render( ) {
-        return ( <NavigationCardStack navigationState={this.props.navState} renderScene={this._renderScene} renderOverlay={this._renderOverlay}/> );
+        return ( <NavigationCardStack navigationState={this.props.navState} renderScene={this._renderScene}/> );
     }
 
 }
