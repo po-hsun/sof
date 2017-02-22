@@ -33,7 +33,6 @@ export default class RootNavigator extends Component {
         super( props );
         this._renderScene = this._renderScene.bind( this );
         this._handleBackAction = this._handleBackAction.bind( this );
-        this._renderOverlay = this._renderOverlay.bind( this );
         this._handleRootNavigate = this._handleNavigate.bind( this );
     }
 
