@@ -10,10 +10,12 @@ import {
     BackAndroid,
     Button
 } from "react-native";
+import { bindActionCreators } from 'redux'
 import { PUSH_ROUTE, POP_ROUTE, BACK_ROUTE, GO_HOME } from '../../constants/constants';
 import type { NavigationSceneRendererProps } from '../../../node_modules/react-native/Libraries/NavigationExperimental/NavigationTypeDefinition';
 import HomeView from '../homeView/home';
 import HomeContainer from '../../containers/homeContainer';
+import fetchData from '../../actions/tabActions';
 
 const { CardStack: NavigationCardStack, StateUtils: NavigationStateUtils, PropTypes: NavigationPropTypes } = NavigationExperimental;
 
@@ -82,7 +84,7 @@ export default class Navigator extends Component {
         console.log( 'renderScene'+' id: '+this.props.id+' tab: '+this.props.title+' component: '+route.key+' position: '+JSON.stringify(props.position)+ ' renderCount: '+this.renderCount );
         this.renderCount = this.renderCount + 1;
         if ( route.key === 'home' ) {
-            return <HomeContainer _handleNavigate={this._handleNavigate.bind( this )} title={this.props.title} index={this.props.index} apiData={this.props.apiData} fetchData={this.props.fetchData}/>;
+            return <HomeContainer _handleNavigate={this._handleNavigate.bind( this )} title={this.props.title} index={this.props.index} />;
         } else if ( route.key === 'attendance' ) {
             return <Attendance _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.id} renderCount={this.renderCount}/>
         } else if ( route.key === 'switchFeed' )

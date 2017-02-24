@@ -14,10 +14,30 @@ const people = [
     }
 ]
 
-export default( ) => {
+// export default( ) => {
+//     return new Promise(( resolve, reject ) => {
+//         setTimeout( ( ) => {
+//             if (Math.round( Math.random( ) % 2 ))
+//                 return resolve( people );
+//             else {
+//                 return reject( 'Error' );
+//             }
+//         }, 3000 )
+//     })
+// }
+
+function fetchData( ) {
     return new Promise(( resolve, reject ) => {
         setTimeout( ( ) => {
-            return resolve( people )
-        }, 3000 )
-    })
+            if (Math.round( Math.random( ) % 2 ))
+                return resolve( people )
+            else
+                return reject( {error:'Error',test:''} );
+            }
+        , 3000 );
+    });
+}
+
+export default async( ) => {
+    return await fetchData( );
 }

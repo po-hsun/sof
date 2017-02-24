@@ -206,14 +206,14 @@ export default class HomeView extends Component {
                     opacity,
                     marginTop
                 }} source={require( './img/money.png' )}/>
-                {!this.props.apiData.isFetching && this.props.apiData.data.length === 0 && (
+                {!this.props.apiData.isFetching && this.props.apiData.data && this.props.apiData.data.length === 0 && !this.props.apiData.error && (
                 <View style={{
                     flex: 1,
                     flexWrap: 'wrap',
                     flexDirection: 'row'
                 }}>{this._renderAnimatedView( )}</View>)}
                 {this.props.apiData.isFetching ? <Text>Fetching</Text> : null}
-                {this.props.apiData.data.length ? this.props.apiData.data.map((data,index)=>{return (<Text key={index}>name: {data.name} age: {data.age}</Text>)}) : null}
+                {this.props.apiData.data && this.props.apiData.data.length ? this.props.apiData.data.map((data,index)=>{return (<Text key={index}>name: {data.name} age: {data.age}</Text>)}) : null}
                 {this.props.apiData.error ? <Text>Error</Text> : null}
             </View>
         );
