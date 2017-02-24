@@ -1,3 +1,5 @@
+import React from 'react-native';
+
 declare module 'react-native' {
     declare var exports : any;
 };

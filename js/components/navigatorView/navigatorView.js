@@ -10,9 +10,12 @@ import {
     BackAndroid,
     Button
 } from "react-native";
+import { bindActionCreators } from 'redux'
 import { PUSH_ROUTE, POP_ROUTE, BACK_ROUTE, GO_HOME } from '../../constants/constants';
 import type { NavigationSceneRendererProps } from '../../../node_modules/react-native/Libraries/NavigationExperimental/NavigationTypeDefinition';
 import HomeView from '../homeView/home';
+import HomeContainer from '../../containers/homeContainer';
+import fetchData from '../../actions/tabActions';
 
 const { CardStack: NavigationCardStack, StateUtils: NavigationStateUtils, PropTypes: NavigationPropTypes } = NavigationExperimental;
 
@@ -57,15 +60,13 @@ const SwitchFeed = ({ _handleNavigate, tabTitle, renderCount }) => (
 export default class Navigator extends Component {
     _renderScene : (props:NavigationSceneRendererProps)=>?React.Element<any>;
     _handleBackAction : Function;
-    _renderOverlay: Function;
     renderCount: number
 
     constructor(props) {
         super(props);
         this._renderScene = this._renderScene.bind( this );
         this._handleBackAction = this._handleBackAction.bind( this );
-        this._renderOverlay = this._renderOverlay.bind(this);
-        this.renderCount = 0;
+        this.renderCount = 1;
     }
 
     componentDidMount( ) {
@@ -83,7 +84,7 @@ export default class Navigator extends Component {
         console.log( 'renderScene'+' id: '+this.props.id+' tab: '+this.props.title+' component: '+route.key+' position: '+JSON.stringify(props.position)+ ' renderCount: '+this.renderCount );
         this.renderCount = this.renderCount + 1;
         if ( route.key === 'home' ) {
-            return <HomeView _handleNavigate={this._handleNavigate.bind( this )} title={this.props.title} index={this.props.index}/>;
+            return <HomeContainer _handleNavigate={this._handleNavigate.bind( this )} title={this.props.title} index={this.props.index} />;
         } else if ( route.key === 'attendance' ) {
             return <Attendance _handleNavigate={this._handleNavigate.bind( this )} tabTitle={this.props.id} renderCount={this.renderCount}/>
         } else if ( route.key === 'switchFeed' )
@@ -111,12 +112,8 @@ export default class Navigator extends Component {
         }
     }
 
-    _renderOverlay(){
-      return <View style={{width:50,height:50,borderRadius:25,backgroundColor:'blue'}}/>
-    }
-
     render( ) {
-        return ( <NavigationCardStack navigationState={this.props.navState} renderScene={this._renderScene} renderOverlay={this._renderOverlay}/> );
+        return ( <NavigationCardStack navigationState={this.props.navState} renderScene={this._renderScene}/> );
     }
 
 }

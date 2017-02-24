@@ -2,7 +2,7 @@
 'use strict';
 import { PRESS_FEED, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_HEATMAP, PRESS_PROFILE } from '../constants/constants';
 
-export function changeTab( index : number ) {
+export default function changeTab( index : number ) {
     var type;
     switch ( index ) {
         case 0:
