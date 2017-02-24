@@ -30,9 +30,9 @@ function fetchData( ) {
     return new Promise(( resolve, reject ) => {
         setTimeout( ( ) => {
             if (Math.round( Math.random( ) % 2 ))
-                return resolve( people )
+                return resolve( people );
             else
-                return reject( {error:'Error',test:''} );
+                return reject( new Error('Error') );
             }
         , 3000 );
     });
