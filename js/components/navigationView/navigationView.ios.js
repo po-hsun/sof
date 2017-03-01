@@ -12,6 +12,7 @@ import {
 import { styles } from './navigationViewStyle';
 import Tab from '../tabView/tabView.ios.js';
 import NavContainer from '../../containers/navContainer';
+import CubeTransitionView from '../cubeTransitionView/cubeTransitionView';
 
 export default class Navigation extends Component {
 
@@ -28,7 +29,7 @@ export default class Navigation extends Component {
     };
 
     render( ) {
-      console.log('navView render');
+      console.log('navView render: ');
         return (
             <TabBarIOS unselectedTintColor="rgb(135,135,135)" tintColor="rgb(73,174,255)" unselectedItemTintColor="rgb(135,135,135)" barTintColor="rgba(250,250,250,0.9)">
                 <Tab title={'Feed'} icon={require( '../../components/tabView/img/icFeed.png' )} selected={this.props.index === 0} onPress={( ) => {
@@ -36,7 +37,7 @@ export default class Navigation extends Component {
                 }}><NavContainer id='Feed'/></Tab>
                 <Tab title={'Curriculum'} icon={require( '../../components/tabView/img/icFeed.png' )} selected={this.props.index === 1} onPress={( ) => {
                     this.props.changeTab( 1 )
-                }}><NavContainer id='Curriculum'/></Tab>
+                }}><CubeTransitionView id='Curriculum'/></Tab>
                 <Tab title={'Activity'} icon={require( '../../components/tabView/img/icActivity.png' )} selected={this.props.index === 2} onPress={( ) => {
                     this.props.changeTab( 2 )
                 }}><NavContainer id='Activity'/></Tab>

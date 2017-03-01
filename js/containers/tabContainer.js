@@ -2,7 +2,7 @@
 'use strict';
 import { connect } from 'react-redux';
 import Navigation from '../components/navigationView/navigationView';
-import { changeTab } from '../actions/tabActions';
+import changeTab from '../actions/tabActions';
 import * as PRESS from '../constants/constants';
 // import { PRESS_FEED, PRESS_HEATMAP, PRESS_CURRICULUM, PRESS_ACTIVITY, PRESS_PROFILE } from '../constants/constants';
 
@@ -16,7 +16,7 @@ function mapStateToProps( state ) {
     const index = state.getIn([ 'tabState', 'indexOfTabs' ]);
     return {
         index: index,
-        title: state.getIn([ 'tabState', 'getCurrentTab()', 'title' ])
+        title: state.getIn([ 'tabState', 'tabs', index, 'title' ])
     };
 }
 
