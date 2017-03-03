@@ -7,12 +7,15 @@ import {
     TouchableHighlight,
     Image,
     TabBarIOS,
-    Button
+    Button,
+    Dimensions
 } from "react-native";
 import { styles } from './navigationViewStyle';
 import Tab from '../tabView/tabView.ios.js';
 import NavContainer from '../../containers/navContainer';
 import CubeTransitionView from '../cubeTransitionView/cubeTransitionView';
+
+const { windowWidth, windowHeight } = Dimensions.get( 'window' );
 
 export default class Navigation extends Component {
 
@@ -21,6 +24,7 @@ export default class Navigation extends Component {
     };
 
     renderContent( name : string ) {
+      this.props.index
         return (
             <View>
                 <Text>name</Text>
@@ -29,7 +33,7 @@ export default class Navigation extends Component {
     };
 
     render( ) {
-      console.log('navView render: ');
+        console.log( 'navView render: ' );
         return (
             <TabBarIOS unselectedTintColor="rgb(135,135,135)" tintColor="rgb(73,174,255)" unselectedItemTintColor="rgb(135,135,135)" barTintColor="rgba(250,250,250,0.9)">
                 <Tab title={'Feed'} icon={require( '../../components/tabView/img/icFeed.png' )} selected={this.props.index === 0} onPress={( ) => {
@@ -40,7 +44,15 @@ export default class Navigation extends Component {
                 }}><CubeTransitionView id='Curriculum'/></Tab>
                 <Tab title={'Activity'} icon={require( '../../components/tabView/img/icActivity.png' )} selected={this.props.index === 2} onPress={( ) => {
                     this.props.changeTab( 2 )
-                }}><NavContainer id='Activity'/></Tab>
+                }}>
+                    <View id='Activity' style={{
+                        flex: 1,
+                        backgroundColor: 'green'
+                    }}>
+                        <View style={{flex:1,backgroundColor:'blue'}}/>
+                        <Text style={{marginBottom:50}}>Test</Text>
+                    </View>
+                </Tab>
                 <Tab title={'Heat Map'} icon={require( '../../components/tabView/img/icHeatmap.png' )} selected={this.props.index === 3} onPress={( ) => {
                     this.props.changeTab( 3 )
                 }}><NavContainer id='Heat Map'/></Tab>
